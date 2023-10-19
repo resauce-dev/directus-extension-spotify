@@ -3,9 +3,9 @@ import PanelComponent from './panel.vue'
 
 export default definePanel({
 	id: 'directus-spotify',
-	name: 'Google Spotify',
+	name: 'Spotify',
 	icon: 'library_music',
-	description: 'Control your spotify from within Directus, there\'s no need to leave the interface now!',
+	description: 'Control your Spotify music from within Directus!',
 	component: PanelComponent,
 	options: [
 		{
