@@ -1,23 +1,29 @@
 {
 	"name": "directus-extension-directus-google-business",
-	"description": "Please enter a description for your extension",
-	"icon": "extension",
 	"version": "1.0.0",
-	"keywords": [
-		"directus",
-		"directus-extension",
-		"directus-custom-bundle"
-	],
 	"type": "module",
 	"directus:extension": {
+		"host": "^10.1.11",
 		"type": "bundle",
 		"path": {
 			"app": "dist/app.js",
 			"api": "dist/api.js"
 		},
-		"entries": [],
-		"host": "^10.1.11"
+		"entries": [
+			{
+				"type": "panel",
+				"name": "google-business-reviews",
+				"source": "src/google-business-reviews/index.ts"
+			}
+		]
 	},
+	"description": "Please enter a description for your extension",
+	"icon": "extension",
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-custom-bundle"
+	],
 	"scripts": {
 		"build": "directus-extension build",
 		"dev": "directus-extension build -w --no-minify",
@@ -25,6 +31,8 @@
 		"add": "directus-extension add"
 	},
 	"devDependencies": {
-		"@directus/extensions-sdk": "10.1.11"
+		"@directus/extensions-sdk": "10.1.11",
+		"typescript": "^5.2.2",
+		"vue": "^3.3.4"
 	}
 }
