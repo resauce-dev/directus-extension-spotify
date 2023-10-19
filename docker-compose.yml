@@ -25,7 +25,7 @@ services:
       # Make sure to also mount the volume when using SQLite
       # - ./database:/directus/database
       # If you want to load extensions from the host
-      - ./:/directus/extensions/directus-extension-google-business
+      - ./:/directus/extensions/directus-extension-spotify
     networks:
       - directus
     depends_on:
@@ -51,7 +51,7 @@ services:
 
       EXTENSIONS_AUTO_RELOAD: true
 
-      RGMB_API_KEY: 'google_my_business_key'
+      SPOTIFY_API_KEY: 'my_api_key'
 
 networks:
   directus:

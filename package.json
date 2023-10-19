@@ -1,5 +1,5 @@
 {
-	"name": "directus-extension-google-business",
+	"name": "directus-extension-spotify",
 	"version": "1.0.0",
 	"type": "module",
 	"directus:extension": {
@@ -12,8 +12,8 @@
 		"entries": [
 			{
 				"type": "panel",
-				"name": "directus-extension-google-business",
-				"source": "src/directus-extension-google-business/index.ts"
+				"name": "directus-extension-spotify",
+				"source": "src/spotify/index.ts"
 			}
 		]
 	},

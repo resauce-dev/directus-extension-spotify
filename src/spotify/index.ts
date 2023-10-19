@@ -2,10 +2,10 @@ import { definePanel } from '@directus/extensions-sdk'
 import PanelComponent from './panel.vue'
 
 export default definePanel({
-	id: 'directus-extension-google-business',
-	name: 'Google Business',
-	icon: 'Storefront',
-	description: 'Manage your Google Business in the same place you manage your business.',
+	id: 'directus-spotify',
+	name: 'Google Spotify',
+	icon: 'library_music',
+	description: 'Control your spotify from within Directus, there\'s no need to leave the interface now!',
 	component: PanelComponent,
 	options: [
 		{
@@ -19,5 +19,5 @@ export default definePanel({
 		},
 	],
 	minWidth: 12,
-	minHeight: 8,
+	minHeight: 10,
 })
