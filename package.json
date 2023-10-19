@@ -1,5 +1,5 @@
 {
-	"name": "directus-extension-directus-google-business",
+	"name": "directus-extension-google-business",
 	"version": "1.0.0",
 	"type": "module",
 	"directus:extension": {
@@ -12,8 +12,8 @@
 		"entries": [
 			{
 				"type": "panel",
-				"name": "google-business-reviews",
-				"source": "src/google-business-reviews/index.ts"
+				"name": "directus-extension-google-business",
+				"source": "src/directus-extension-google-business/index.ts"
 			}
 		]
 	},

@@ -1,3 +1,1 @@
-const hooks = [];const endpoints = [];const operations = [];
-
-export { endpoints, hooks, operations };
+const o=[],t=[],c=[];export{t as endpoints,o as hooks,c as operations};
