@@ -23,9 +23,9 @@ export default definePanel({
 			name: 'Friendly Stream Name',
 			type: 'string',
 			meta: {
-				note: 'When you want to cast from Spotify, what name should appear under the cast options?',
+				note: 'What name should appear under the cast options in Spotify?',
 				interface: 'input',
-				width: 'full',
+				width: 'half',
 			},
 			schema: {
 				default_value: 'Directus',
@@ -36,28 +36,29 @@ export default definePanel({
 			name: 'Allow Controls',
 			type: 'boolean',
 			meta: {
-				note: 'Should the media controls be displayed, or should it only show the media information.',
+				note: 'Should the interactive media controls be displayed?',
+				width: 'half',
 				interface: 'toggle',
-				width: 'full',
+				required: true,
 			},
 			schema: {
-				default_value: true,
+				default_value: false,
 			},
 		},
 		{
 			field: 'defaultVolume',
-			name: 'Allow Controls',
+			name: 'Default Volume',
 			type: 'string',
 			meta: {
-				note: 'What volume (0-100) should be the default when this player is connected to?',
-				interface: 'string',
+				note: 'What volume (0-100) should be the default when this player connects?',
+				interface: 'slider',
 				width: 'full',
 			},
 			schema: {
-				default_value: 0,
+				default_value: 50,
 			},
 		},
 	],
 	minWidth: 20,
-	minHeight: 22,
+	minHeight: 6,
 })

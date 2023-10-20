@@ -15,7 +15,7 @@
 
       <v-card class="nowplaying">
         <div class="nowplaying__image">
-          <img 
+          <img
             v-if="currentTrack"
             :src="currentTrack?.album?.images?.find(img => img?.size === 'SMALL')?.url"
           />
@@ -23,53 +23,56 @@
         </div>
         <div class="nowplaying__detail">
           <div>{{ currentTrack?.name || 'Spotify Disconnected' }}</div>
-          <div>
+          <div style="font-size: 12px;">
             <template v-for="artist in currentTrack?.artists || []">
-              <a :href="artist.url">{{ artist.name }}</a>, 
+              <a :href="artist.url">{{ artist.name }}</a>,
             </template>
           </div>
         </div>
       </v-card>
-      
-			<v-card v-if="currentTrack" class="controls">
-				<v-button class="btn-action" x-small icon rounded @click="player.previousTrack()">
-					<v-icon name="skip_previous" />
-				</v-button>
-				<v-button class="btn-action" icon rounded>
-					<v-icon name="play_pause" @click="player.togglePlay()"/>
-					<!-- pause / play_arrow-->
-				</v-button>
-				<v-button class="btn-action" x-small icon rounded>
-					<v-icon name="skip_next" @click="player.nextTrack()"/>
-				</v-button>
-			</v-card>
 
-      <v-card v-if="currentTrack" style="display: flex;width:100%;">
+      <v-card v-if="allowControls && currentTrack" class="controls">
+        <v-button class="btn-action" x-small icon rounded @click="player.previousTrack()">
+          <v-icon name="skip_previous" />
+        </v-button>
+        <v-button class="btn-action" icon rounded>
+          <v-icon :name="isPlaying ? 'pause' : 'play_arrow'" @click="player.togglePlay()"/>
+          <!-- -->
+        </v-button>
+        <v-button class="btn-action" x-small icon rounded>
+          <v-icon name="skip_next" @click="player.nextTrack()"/>
+        </v-button>
+      </v-card>
+
+      <v-card class="controls" v-if="allowControls && currentTrack">
         <p>Volume Slider:</p>
-				<v-icon :name="volumeIcon" left clickable large>
-					<span class="sr-only">Volume Toggle</span>
-				</v-icon>
-				<v-slider 
-					aria-label="Volume Slider"
-					:disabled="false"
-					:max="1"
-					:min="0"
-					:step="0.01"
-					v-model="volume"
-				/>
-			</v-card>
+        <v-icon :name="volumeIcon" left clickable large>
+          <span class="sr-only">Volume Toggle</span>
+        </v-icon>
+        <v-slider
+          class="v-slider"
+          aria-label="Volume Slider"
+          :disabled="false"
+          :max="1"
+          :min="0"
+          :step="0.01"
+          v-model="volume"
+        />
+      </v-card>
 
-			<v-card v-if="currentTrack" style="display: flex;width:100%;">
+      <v-card class="controls" v-if="allowControls && currentTrack">
         <p>Audio Track Slider:</p>
-				<v-slider 
-					aria-label="Audio Track Slider"
-					:disabled="false"
-					:max="state.duration"
-					:min="0"
-					:step="(currentTrack?.duration_ms / 60000) * 60"
-					v-model="audioTrack"
-				/>
-			</v-card>
+        <v-slider
+          class="v-slider"
+          aria-label="Audio Track Slider"
+          :disabled="false"
+          :max="state.duration"
+          :min="0"
+          :step="(currentTrack?.duration_ms / 60000) * 60"
+          v-model="audioTrack"
+        />
+      </v-card>
+
 
 		</div>
 
@@ -84,25 +87,6 @@ const { player, defaultVolume, allowControls } = defineProps<{
   defaultVolume: number // 0-1
   allowControls: boolean
 }>()
-
-// const isActive = ref(player.is_active)
-
-// const volume = computed({
-//   get: async () => {
-//     if (!player) {
-//       return undefined
-//     }
-//     return await player.getVolume()
-//   },
-//   set: (newValue) => {
-//     if (!player) {
-//       return undefined
-//     }
-//     player.setVolume(newValue).then(() => {
-//       console.log('Volume updated!')
-//     })
-//   },
-// })
 
 const audioTrack = ref(0)
 watch(audioTrack, (newValue) => {
@@ -127,7 +111,7 @@ const volumeIcon = computed(() => {
 
 const state = ref()
 const currentTrack = ref()
-
+const isPlaying = ref(false)
 
 
 
@@ -137,12 +121,14 @@ function updatePlayingState(data) {
   state.value = { ...data }
   audioTrack.value = state.value?.position || 0
   currentTrack.value = state.value?.track_window?.current_track
+  isPlaying.value = !state.value?.paused
 }
 
 onMounted(() => {
   console.log('Mounted')
   player.addListener('player_state_changed', updatePlayingState)
   player.getCurrentState().then(updatePlayingState)
+  player.getVolume().then(vol => volume.value = vol)
 
 })
 onBeforeUnmount(() => {
@@ -153,21 +139,6 @@ onBeforeUnmount(() => {
 player.on('playback_error', ({ message }) => {
   console.error('Failed to perform playback', message)
 })
-
-// player.getCurrentState().then(state => {
-// 	if (!state) {
-// 		console.error('User is not playing music through the Web Playback SDK')
-// 		return
-// 	}
-
-// 	var current_track = state.track_window.current_track
-// 	var next_track = state.track_window.next_tracks[0]
-
-// 	console.log('Currently Playing', current_track)
-// 	console.log('Playing Next', next_track)
-// })
-
-
 </script>
 
 <style scoped>
@@ -193,6 +164,10 @@ player.on('playback_error', ({ message }) => {
 
 
 
+.v-slider {
+  margin-top: 0.5rem;
+}
+
 
 .controls {
   display: flex;
@@ -211,7 +186,7 @@ player.on('playback_error', ({ message }) => {
   padding: 1rem;
 }
 .nowplaying__image {
-  width:64px; 
+  width:64px;
   height:64px;
   background: var(--background-normal-alt);
   border-radius: 5px;
