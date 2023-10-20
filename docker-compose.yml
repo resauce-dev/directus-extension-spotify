@@ -51,7 +51,9 @@ services:
 
       EXTENSIONS_AUTO_RELOAD: true
 
-      SPOTIFY_API_KEY: 'my_api_key'
+      CONTENT_SECURITY_POLICY_DIRECTIVES__SCRIPT_SRC: "'self' data: 'unsafe-eval' https://sdk.scdn.co"
+      CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC: "'self' data: 'unsafe-eval' https://sdk.scdn.co"
+      CONTENT_SECURITY_POLICY_DIRECTIVES__IMG_SRC: "'self' data: blob: 'unsafe-eval' https://i.scdn.co"
 
 networks:
   directus:
