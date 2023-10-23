@@ -16,32 +16,45 @@ TODO
 
 **What problem does this project solve?**
 
-TODO
+I can foresee two positions where this extension solves a problem.
 
-## Future Improvements & Enhancements
-- Add link to actual Spotify song
-- Upon changing props that affect the player, reload the component
-- move all error functions to one functions they all use to reject.
-- Add tailwind
-- Add a debounce for setting volume and seek to avoid spam (cursor release only?)
-- Add stronger typescript support
-- Flexible UI so that it works regardless of screen-size
-- Add solution for iOS limitations autoplay? - use activate element to fix ios?
-- Assess ability to stop it disconnecting when reloading page.
-- Visual: Up Next (Album Art/Artist/Song Name)
-- Assess if we could persist the panel somehow across the whole application?
-- Can I limit panel so only one panel type can be created?
+When someone spends the majority of their day on a dashboard, in multiple panels, potentially responding to messages or graphing data, habing media controls to hand can be really helpful!
 
-- **Other**
-- Allow login using a [Spotify development app.](https://developer.spotify.com/dashboard/create)
-- Can I reuse a swiper component from one of my other sites to allow UI friendly forward and backward Navigation?
-- make an example display for screenshot
-  - (Avg Per Hour, Business Rating, Busy Indicator, WiFi Password, Spotify Tunes, Social Media, Latest Social Feed?)
+Additionally, if you have a dashboard on a full-screen display. You can now spruce up it's functionality and play media through it. The UI can even be simplified by hiding controls and choosing to control the media from another authenticated device with ease, essentially casting the media to the dashboard.
+
+Effortlessly manage audio from an external device by casting the media onto the dashboard.
+Either manage the media within the dashboard if it's interactive, or you can seamlessly declutter the dashboard by concealing the interactive controls becoming a live display only.
+
+## Improvements & Enhancements
+
+**Release Critical**
+- Login support using a [Spotify development app.](https://developer.spotify.com/dashboard/create)
+
+
+**Enhancements**
+- UI: Add tailwind for easier styling
+- UI: Indetification of authentication failures after rendered has happened
+- UI: Indetification of autoplay limitations (use activateElement function to fix)
+- UI: Improve styling of Volume & Seek sliders
+- UI: Make it flexible to work with any panel-size.
+- UI/Functionality: Make audio seek move along with the music
+- Functionality: Changing insights props that affect the player should reload the component.
+
+- Technical Debt: Add debounce or trigger for dragging live volume and seek (to avoid spam)
+- Technical Debt: Can I limit panel so only one panel type can be created?
+
+- **Long Term**
+- Improvement: Stronger typescript support
+- Improvement: Links to Spotify song & authors
+- Enhancement: Assess ability to stop the player from disconnecting when reloading page.
+- UI Enhancement: Tinder-like swiper for next/prev songs
 
 **Current Features:**
 
 - Interactive Panel or Display-Only Options
 - Visual: Now Playing (Album Art/Artist/Song Name)
+- Visual: Last Played, and Up Next (Album Art/Artist/Song Name)
+- Visual: Status of 'Shuffle' and 'Repeat'
 - Controls: Play/Pause, Next, and Previous
 - Controls: Volume
 - Controls: Audio Seek
