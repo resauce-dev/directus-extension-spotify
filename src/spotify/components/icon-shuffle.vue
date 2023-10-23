@@ -18,5 +18,5 @@ const icon = computed<ShuffleIcon>((): ShuffleIcon => {
   return 'shuffle'
 })
 
-const label = computed<string>((): string => 'Shuffle ' + props.isShuffled ? 'On' : 'Off')
+const label = computed<string>((): string => props.isShuffled ? 'Shuffle On' : 'Shuffle Off')
 </script>
