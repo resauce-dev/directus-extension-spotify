@@ -32,6 +32,8 @@ Either manage the media within the dashboard if it's interactive, or you can sea
 
 
 **Enhancements**
+- Technical Debt: Allow more than one panel to load / Add custom listener event to resolve components when spotify is ready.
+- Bug: Reactive state is causing glitch upon changing things do up then updating refs.
 - UI: Add tailwind for easier styling
 - UI: Indetification of authentication failures after rendered has happened
 - UI: Indetification of autoplay limitations (use activateElement function to fix)
@@ -39,9 +41,6 @@ Either manage the media within the dashboard if it's interactive, or you can sea
 - UI: Make it flexible to work with any panel-size.
 - UI/Functionality: Make audio seek move along with the music
 - Functionality: Changing insights props that affect the player should reload the component.
-
-- Technical Debt: Add debounce or trigger for dragging live volume and seek (to avoid spam)
-- Technical Debt: Can I limit panel so only one panel type can be created?
 
 - **Long Term**
 - Improvement: Stronger typescript support

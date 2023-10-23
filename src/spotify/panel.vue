@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, ref } from 'vue'
+import { watch, ref, computed } from 'vue'
 import { defineAsyncComponent } from 'vue'
 import PlayerLoading from './screens/player-loading.vue'
 import PlayerComponentX from './screens/player.vue'
@@ -27,6 +27,7 @@ const sdkInsertElement = ref()
 
 function importSpotifySDK(bindElement: HTMLElement): void {
   const alreadyImported = document.getElementById('spotify-script')
+  console.log('alreadyImported')
   if (!alreadyImported) {
     var scriptTag = document.createElement("script")
     scriptTag.src = "https://sdk.scdn.co/spotify-player.js"
@@ -47,6 +48,7 @@ const PlayerComponent = defineAsyncComponent({
 
   loader: () => {
     return new Promise((resolve, reject): void => {
+
       /**
        * If a player is already initiated, load it back up.
        */
@@ -68,7 +70,7 @@ const PlayerComponent = defineAsyncComponent({
       })
 
       window.onSpotifyWebPlaybackSDKReady = (): void => {
-
+        console.log('RUNNING WINDOW.ONSPORITFYTLOADINGTHING')
         const player = new Spotify.Player({
           name: props.streamName,
           getOAuthToken: cb => { cb(props.apiToken) },
@@ -92,7 +94,6 @@ const PlayerComponent = defineAsyncComponent({
         player.addListener('account_error', errorHandler)
         player.addListener('autoplay_failed', () => {
           log('Autoplay is not allowed by the browser autoplay rules')
-          player.activateElement()
         })
 
         /**
