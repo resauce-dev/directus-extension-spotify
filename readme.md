@@ -7,7 +7,7 @@ Do you have a dashboard displayed on a monitor? Elevate its ambiance by integrat
 
 ## Screenshot / Video
 
-TODO
+![Picture of the interface](./screenshot.png)
 
 ## Details
 
